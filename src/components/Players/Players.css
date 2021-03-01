@@ -1,0 +1,15 @@
+.players {
+  margin-bottom: 2em;
+}
+.players-image {
+    padding-left: 1.5em;
+}
+.players-image img {
+    width:250px;
+}
+.player-details {
+  margin-left: 2em;
+}
+button {
+  margin-top: 20px !important;
+}

@@ -1,23 +1,47 @@
-import logo from './logo.svg';
+import React, { useState, useEffect } from 'react';
+import Players from './components/Players/Players';
+import Teamcart from './components/Teamcart/Teamcart';
+import PlayersData from './components/fakeData/data.json'
 import './App.css';
-
+import 'bootstrap/dist/css/bootstrap.min.css';
 function App() {
+
+  let text = '';
+
+  const [players, setPlayers] = useState([]);
+  const [teamcart, setTeamcart] = useState([]);
+
+  useEffect(() => {
+    setPlayers(PlayersData);
+  }, [])
+
+  const handleAddPlayers = (addPlayers) => {
+    console.log("addPlayers", addPlayers)
+    if (teamcart.indexOf(addPlayers) == -1) {
+      const newTeamCart = [...teamcart, addPlayers];
+      setTeamcart(newTeamCart);
+    } else {
+      alert(addPlayers.name + ` Already Added`)
+    }
+
+  }
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h2 className="text-center">Make your dream team</h2>
+      <div className="players">
+            <div className="available-players">
+              <h2>Available Players</h2>
+              {
+                players.map(player => <Players players={player} key={player.id} handleAddPlayers={handleAddPlayers} ></Players>)
+              }
+            </div>
+            <div className="selected-players">
+              <h2>Selected Players</h2>
+              <Teamcart cart={teamcart}></Teamcart>
+          </div>
+      </div>
     </div>
   );
 }
